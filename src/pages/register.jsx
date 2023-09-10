@@ -10,7 +10,7 @@ import { TextField, Button, Container, Stack, Alert } from "@mui/material";
 
 const REGISTER_USER = gql`
   mutation CreateUser($createUserInput: CreateUserInput!) {
-    createUser(createUserInput: $createUserInput) {
+    register(createUserInput: $createUserInput) {
       _id
       username
       email
@@ -23,19 +23,14 @@ function Register(props) {
   let navigate = useNavigate();
   const [errors, setErrors] = useState([]);
 
-  function registerUserCallBack() {
-    console.log("callback hit");
-    createUser();
-  }
-
   const { onChange, onSubmit, values } = useForm(registerUserCallBack, {
     username: "",
     email: "",
     password: "",
   });
 
-  const [createUser, { loading }] = useMutation(REGISTER_USER, {
-    update(proxy, { data: { createUser: userData } }) {
+  const [register, { loading }] = useMutation(REGISTER_USER, {
+    update(proxy, { data: { register: userData } }) {
       context.login(userData);
       navigate("/");
     },
@@ -46,6 +41,11 @@ function Register(props) {
       createUserInput: values,
     },
   });
+
+  function registerUserCallBack() {
+    console.log("callback hit");
+    register();
+  }
 
   return (
     <Container spacing={2} maxWidth="sm">

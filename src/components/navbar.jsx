@@ -13,15 +13,13 @@ function Navbar() {
     navigate("/");
   };
 
-  console.log(user);
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h5" component="div">
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              React Login
+              Chat Application
             </Link>
           </Typography>
           <Box alignItems="right" sx={{ flexGrow: 1, textAlign: "right" }}>

@@ -34,7 +34,7 @@ function Login(props) {
 
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(proxy, { data: { loginUser: userData } }) {
-        console.log(userData);
+      console.log(userData);
       context.login(userData);
       navigate("/");
     },
@@ -42,24 +42,30 @@ function Login(props) {
       setErrors(graphQLErrors);
     },
     variables: {
-        loginUserInput: values,
+      loginUserInput: values,
     },
   });
 
   return (
     <Container spacing={2} maxWidth="sm">
-    <h3>Login</h3>
-    <p>This is a login page</p>
-    <Stack spacing={2} paddingBottom={2}>
-      <TextField label="Email" name="email" onChange={onChange} />
-      <TextField label="Password" name="password" onChange={onChange} />
-    </Stack>
-    {errors.map((err,index) => {
-      return <Alert severity="error" key={index}>{err.message}</Alert>;
-    })}
-    <Button variant="contained" onClick={onSubmit}>Login</Button>
-  </Container>
-  )
+      <h3>Login</h3>
+      <p>This is a login page</p>
+      <Stack spacing={2} paddingBottom={2}>
+        <TextField label="Email" name="email" onChange={onChange} />
+        <TextField label="Password" name="password" onChange={onChange} />
+      </Stack>
+      {errors.map((err, index) => {
+        return (
+          <Alert severity="error" key={index}>
+            {err.message}
+          </Alert>
+        );
+      })}
+      <Button variant="contained" onClick={onSubmit}>
+        Login
+      </Button>
+    </Container>
+  );
 }
 
 export default Login;
