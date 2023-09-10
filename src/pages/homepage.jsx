@@ -1,28 +1,31 @@
 import { Box, Typography } from "@mui/material";
 import { AuthContext } from "../context/authContext";
 import { useContext } from "react";
+import { gql, useQuery } from "@apollo/client";
+import Room from "../components/room";
 
 const GET_ROOMS = gql`
-  mutation GetRooms {
+  query {
     rooms {
       _id
-      username
-      email
+      name
     }
   }
 `;
 
 function Homepage() {
   const { user, logout } = useContext(AuthContext);
+
+
+  const { loading, error, data } = useQuery(GET_ROOMS);
+
   return (
     <Box sx={{ width: "100%", maxWidth: 500 }}>
       <Typography variant="h6" gutterBottom>
         This is the homepage
       </Typography>
       {user ? (
-        <>
-          <p>{user.access_token}</p>
-        </>
+        <Room rooms={data}/>
       ) : (
         <>
           <p>There is no user data</p>

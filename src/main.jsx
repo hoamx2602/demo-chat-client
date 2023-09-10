@@ -6,14 +6,18 @@ import { ApolloProvider } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/authContext.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@emotion/react";
+import theme from "./theme.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <ApolloProvider client={client}>
       <BrowserRouter>
         <React.StrictMode>
-          <CssBaseline />
-          <App />
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
         </React.StrictMode>
       </BrowserRouter>
     </ApolloProvider>
